@@ -91,6 +91,12 @@ int LinkedList::get_size(){
   return size;
 }
 
+void LinkedList::delete_node(Node* curr_node){
+  cut_node(curr_node);
+  delete curr_node;
+}
+
+
 LinkedList::~LinkedList(){
   Node* curr_node = head;
   while (curr_node != nullptr){

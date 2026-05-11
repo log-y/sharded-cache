@@ -23,6 +23,7 @@ class LinkedList {
     void move_to_back(Node* new_node);
     void pop_front();
     int get_size();
+    void delete_node(Node* curr_node);
 };
 
 #endif 
