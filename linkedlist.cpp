@@ -1,11 +1,19 @@
 // linkedlist.cpp
 
 #include "linkedlist.h"
+#include <iostream>
 
 LinkedList::LinkedList()
 {
-  Node *head = new Node(-1, 0);
-  Node *tail = new Node(-1, 0);
+  try 
+  {
+    Node *head = new Node(-1, 0);
+    Node *tail = new Node(-1, 0);
+  }
+  catch (const std::bad_alloc& e){
+    std::cerr << "error allocating" << std::endl;
+  }
+  
   head->next = tail;
   tail->prev = head;
   size = 0;
@@ -31,6 +39,9 @@ Node *LinkedList::get_front()
 
 void LinkedList::add_between_nodes(Node *new_node, Node *left, Node *right)
 {
+  if (new_node == nullptr || left == nullptr || right == nullptr){
+    return;
+  }
   left->next = new_node;
   new_node->prev = left;
   right->prev = new_node;
