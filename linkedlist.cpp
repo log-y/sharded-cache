@@ -90,3 +90,12 @@ void LinkedList::pop_front(){
 int LinkedList::get_size(){
   return size;
 }
+
+LinkedList::~LinkedList(){
+  Node* curr_node = head;
+  while (curr_node != nullptr){
+    Node* next = curr_node->next;
+    delete curr_node;
+    curr_node = next;
+  }
+}

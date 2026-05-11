@@ -16,6 +16,7 @@ class LinkedList {
 
   public:
     LinkedList();
+    ~LinkedList();
     void push_back(Node* new_node);
     Node* get_back();
     Node* get_front();
