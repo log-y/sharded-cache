@@ -10,7 +10,7 @@ class Shard {
   private:
     int capacity;
     std::unordered_map<int, int> map;
-    LinkedList* list;
+    LinkedList list;
 
   public:
     Shard(int size);
