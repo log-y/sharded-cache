@@ -73,7 +73,7 @@ void LinkedList::pop_front()
   }
   Node *first = head->next;
   cut_node(first);
-  // delete first;
+  delete first;
   size--;
 }
 

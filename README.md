@@ -1,7 +1,7 @@
 # sharded-cache
 
 compile and run: 
-g++ main.cpp shard.cpp linkedlist.cpp node.cpp -o lru_cache
+g++ main.cpp cache.cpp shard.cpp linkedlist.cpp node.cpp -o lru_cache
 
 compile with debug symbols:
 g++ -g main.cpp shard.cpp linkedlist.cpp node.cpp -o lru_cache

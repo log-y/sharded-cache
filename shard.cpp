@@ -36,9 +36,8 @@ void Shard::set(int key, int val)
   if (map.size() == capacity)
   {
     Node *front = list.get_front();
-    list.pop_front();
     map.erase(front->key);
-    delete front;
+    list.pop_front();
   }
 
   // add new node to back
