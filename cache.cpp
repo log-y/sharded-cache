@@ -1,6 +1,9 @@
 // cache.cpp
 
 #include "cache.h"
+#include <iostream>
+
+using namespace std;
 
 Cache::Cache(int shard_count, int shard_size){
   // initialize shards
@@ -17,22 +20,19 @@ int Cache::get_idx(int key){
 
 int Cache::get(int key){
   int idx = get_idx(key);
-  buckets[idx].lock->lock();
+  lock_guard<mutex> lock(*(buckets[idx].lock));
   int res = buckets[idx].shard.get(key);
-  buckets[idx].lock->unlock();
   return res;
 }
 
 void Cache::set(int key, int value){
   int idx = get_idx(key);
-  buckets[idx].lock->lock();
+  lock_guard<mutex> lock(*(buckets[idx].lock));
   buckets[idx].shard.set(key, value);
-  buckets[idx].lock->unlock();
 }
 
 void Cache::remove(int key){
   int idx = get_idx(key);
-  buckets[idx].lock->lock();
+  lock_guard<mutex> lock(*(buckets[idx].lock));
   buckets[idx].shard.remove(key);
-  buckets[idx].lock->unlock();
 }

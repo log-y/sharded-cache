@@ -31,25 +31,25 @@ void run_basic_tests(){
 }
 
 void basic_cache_tests(){
-  Cache cache = Cache(1, 1);
+  Cache cache = Cache(1, 2);
 
-  // cache.set(1, 10);
-  // cache.set(2, 20);
+  cache.set(1, 10);
+  cache.set(2, 20);
 
-  // assert(cache.get(1) == 10); 
-  // assert(cache.get(2) == 20);
+  assert(cache.get(1) == 10); 
+  assert(cache.get(2) == 20);
 
-  // cache.set(3, 30);
+  cache.set(3, 30);
 
-  // assert(cache.get(2) == 20);
-  // assert(cache.get(1) == -1);
-  // assert(cache.get(3) == 30);
+  assert(cache.get(2) == 20);
+  assert(cache.get(1) == -1);
+  assert(cache.get(3) == 30);
 
-  // cache.set(4, 40);
+  cache.set(4, 40);
 
-  // assert(cache.get(2) == -1);
-  // assert(cache.get(3) == 30);
-  // assert(cache.get(4) == 40);
+  assert(cache.get(2) == -1);
+  assert(cache.get(3) == 30);
+  assert(cache.get(4) == 40);
 
   cout << "basic cache tests are successful!" << endl;
 }
