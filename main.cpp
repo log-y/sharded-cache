@@ -12,10 +12,11 @@
 
 using namespace std;
 
-int OPS_PER_THREAD = 1000000;
-int THREADS = 16;
-int NUM_SHARDS = 100;
-int CAPACITY_PER_SHARD = 10000;
+int OPS_PER_THREAD = 40000;
+int THREADS = 60;
+int NUM_SHARDS = 126;
+int CAPACITY_PER_SHARD = 4098;
+int READ_TO_WRITES = 0;
 
 random_device rd;
 mt19937 gen(rd());
@@ -35,7 +36,7 @@ int main(int argv, char *argc[])
   auto start_single = chrono::high_resolution_clock::now();
   stress_test_single_threaded();
   auto end_single = chrono::high_resolution_clock::now();
-  
+
   auto start_multi = chrono::high_resolution_clock::now();
   stress_test();
   auto end_multi = chrono::high_resolution_clock::now();
@@ -62,7 +63,9 @@ void stress_test_single_threaded()
 
     shard.set(key, val);
     int retrieved = shard.get(key);
-    // assert(val == retrieved);
+    for (int j = 0; j < READ_TO_WRITES; j++){
+      shard.get(key - j);
+    }
   }
 
   cout << "ending single threaded stress test" << endl;
@@ -97,6 +100,9 @@ void stress_test_helper(Cache &cache, int num_operations, int thread_id)
 
     cache.set(key, val);
     int retrieved = cache.get(key);
+    for (int j = 0; j < READ_TO_WRITES; j++){
+      cache.get(key - j);
+    }
   }
 }
 
