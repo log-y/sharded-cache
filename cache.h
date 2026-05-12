@@ -12,9 +12,14 @@ using namespace std;
 
 class Cache{
   private:
+    struct Bucket{
+      unique_ptr<mutex> lock;
+      Shard shard;
+      Bucket(int cap) : shard(cap) {}
+      // Bucket(const Bucket&) = delete;
+    };
+    vector<Bucket> buckets;
     
-    vector<unique_ptr<mutex>> locks;
-    vector<Shard> shards;
     int shard_count;
 
     int get_idx(int key);

@@ -4,7 +4,7 @@ compile and run:
 g++ main.cpp cache.cpp shard.cpp linkedlist.cpp node.cpp -o lru_cache
 
 compile with debug symbols:
-g++ -g main.cpp shard.cpp linkedlist.cpp node.cpp -o lru_cache
+g++ -g main.cpp cache.cpp shard.cpp linkedlist.cpp node.cpp -o lru_cache
 gdb ./lru_cache
 
 run with ./lru_cache

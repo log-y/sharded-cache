@@ -2,8 +2,7 @@
 #include <string>
 #include <assert.h>
 
-#include "shard.h"
-#include "linkedlist.h"
+#include "cache.h"
 
 using namespace std;
 
@@ -31,9 +30,35 @@ void run_basic_tests(){
   cout << "basic tests are successful!" << endl;
 }
 
+void basic_cache_tests(){
+  Cache cache = Cache(1, 1);
+
+  // cache.set(1, 10);
+  // cache.set(2, 20);
+
+  // assert(cache.get(1) == 10); 
+  // assert(cache.get(2) == 20);
+
+  // cache.set(3, 30);
+
+  // assert(cache.get(2) == 20);
+  // assert(cache.get(1) == -1);
+  // assert(cache.get(3) == 30);
+
+  // cache.set(4, 40);
+
+  // assert(cache.get(2) == -1);
+  // assert(cache.get(3) == 30);
+  // assert(cache.get(4) == 40);
+
+  cout << "basic cache tests are successful!" << endl;
+}
+
+
 int main(int argv, char *argc[])
 {
   run_basic_tests();
+  basic_cache_tests();
 
   return 0;
 }

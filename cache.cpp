@@ -4,11 +4,11 @@
 
 Cache::Cache(int shard_count, int shard_size){
   // initialize shards
+  buckets.reserve(shard_count);
   for(int i = 0; i < shard_count; i++){
-    shards.push_back(Shard(shard_size));
-    locks.push_back(make_unique<mutex>());
+    buckets.emplace_back(shard_size);
   }
-  shard_count = shard_count;
+  this->shard_count = shard_count;
 }
 
 int Cache::get_idx(int key){
@@ -17,22 +17,22 @@ int Cache::get_idx(int key){
 
 int Cache::get(int key){
   int idx = get_idx(key);
-  locks[idx]->lock();
-  int res = shards[idx].get(key);
-  locks[idx]->unlock();
+  buckets[idx].lock->lock();
+  int res = buckets[idx].shard.get(key);
+  buckets[idx].lock->unlock();
   return res;
 }
 
 void Cache::set(int key, int value){
   int idx = get_idx(key);
-  locks[idx]->lock();
-  shards[idx].set(key, value);
-  locks[idx]->unlock();
+  buckets[idx].lock->lock();
+  buckets[idx].shard.set(key, value);
+  buckets[idx].lock->unlock();
 }
 
 void Cache::remove(int key){
   int idx = get_idx(key);
-  locks[idx]->lock();
-  shards[idx].remove(key);
-  locks[idx]->unlock();
+  buckets[idx].lock->lock();
+  buckets[idx].shard.remove(key);
+  buckets[idx].lock->unlock();
 }
