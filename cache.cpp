@@ -14,8 +14,17 @@ Cache::Cache(int shard_count, int shard_size){
   this->shard_count = shard_count;
 }
 
+uint32_t hash_int(uint32_t x) {
+    x = ((x >> 16) ^ x) * 0x45d9f3b;
+    x = ((x >> 16) ^ x) * 0x45d9f3b;
+    x = (x >> 16) ^ x;
+    return x;
+}
+
 int Cache::get_idx(int key){
-  return (unsigned int)(key) % shard_count;
+  // uint32_t hash = hash_int(key);
+  // return hash % this->shard_count;
+  return (unsigned int)key % this->shard_count;
 }
 
 int Cache::get(int key){

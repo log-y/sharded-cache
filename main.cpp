@@ -5,15 +5,21 @@
 #include <assert.h>
 #include <thread>
 #include <chrono>
+#include <assert.h>
+#include <random>
 
 #include "cache.h"
 
 using namespace std;
 
-int OPS_PER_THREAD = 100000;
+int OPS_PER_THREAD = 1000000;
 int THREADS = 16;
-int NUM_SHARDS = 1000;
+int NUM_SHARDS = 100;
 int CAPACITY_PER_SHARD = 10000;
+
+random_device rd;
+mt19937 gen(rd());
+uniform_int_distribution<> distr(1, 1000);
 
 void run_basic_tests();
 void basic_cache_tests();
@@ -56,6 +62,7 @@ void stress_test_single_threaded()
 
     shard.set(key, val);
     int retrieved = shard.get(key);
+    // assert(val == retrieved);
   }
 
   cout << "ending single threaded stress test" << endl;
@@ -86,7 +93,7 @@ void stress_test_helper(Cache &cache, int num_operations, int thread_id)
   for (int i = 0; i < num_operations; i++)
   {
     int key = i;
-    int val = i + (thread_id * 1000);
+    int val = i + (key * 1000);
 
     cache.set(key, val);
     int retrieved = cache.get(key);
