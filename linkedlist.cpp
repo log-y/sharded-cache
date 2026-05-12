@@ -24,15 +24,6 @@ LinkedList::LinkedList()
   size = 0;
 }
 
-Node *LinkedList::get_back()
-{
-  if (size == 0)
-  {
-    return nullptr;
-  }
-  return tail->prev;
-}
-
 Node *LinkedList::get_front()
 {
   if (size == 0)
@@ -106,11 +97,6 @@ void LinkedList::move_to_back(Node *new_node)
   }
   cut_node(new_node);
   push_back(new_node);
-}
-
-int LinkedList::get_size()
-{
-  return size;
 }
 
 void LinkedList::delete_node(Node *curr_node)
