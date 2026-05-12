@@ -7,8 +7,7 @@
 
 using namespace std;
 
-int main(int argv, char *argc[])
-{
+void run_basic_tests(){
   Shard shard = Shard(2);
 
   shard.set(1, 10);
@@ -29,7 +28,12 @@ int main(int argv, char *argc[])
   assert(shard.get(3) == 30);
   assert(shard.get(4) == 40);
 
-  cout << "tests are successful!" << endl;
+  cout << "basic tests are successful!" << endl;
+}
+
+int main(int argv, char *argc[])
+{
+  run_basic_tests();
 
   return 0;
 }
