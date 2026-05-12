@@ -12,7 +12,7 @@ Shard::Shard(int size)
 
 int Shard::get(int key)
 {
-  if (map.find(key) != map.end())
+  if (map.find(key) == map.end())
   {
     return -1;
   }
@@ -23,35 +23,37 @@ int Shard::get(int key)
 
 void Shard::set(int key, int val)
 {
-  // if the key does NOT exist, create it and rearrange if needed
+  // if it DOES exist, move it to the back 
   if (map.find(key) != map.end())
   {
-    if (map.size() == capacity)
-    {
-      list.pop_front();
-    }
-    try {
-      Node *new_node = new Node(key, val);
-      list.push_back(new_node);
-      map[key] = new_node;
-    }
-    catch(const std::bad_alloc& e){
-      std::cerr << "error allocating" << std::endl;
-    }
+    Node *node = map[key];
+    list.move_to_back(node);
+    map[key]->val = val;
     return;
   }
 
-  // if the key DOES exist, update the value and order of linked list
-  Node* curr_node = map[key];
-  curr_node->val = val;
+  // if size is full, delete the front
+  if (map.size() == capacity)
+  {
+    Node *front = list.get_front();
+    list.pop_front();
+    map.erase(front->key);
+    delete front;
+  }
 
-  list.move_to_back(curr_node);
+  // add new node to back
+  Node *new_node = new Node(key, val);
+  list.push_back(new_node);
+  map[key] = new_node;
 }
 
-void Shard::remove(int key){
-  if (map.find(key) == map.end()){
+void Shard::remove(int key)
+{
+  if (map.find(key) == map.end())
+  {
     return;
   }
-  Node* curr_node = map[key];
+  Node *curr_node = map[key];
   list.delete_node(curr_node);
+  map.erase(key);
 }
