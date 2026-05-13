@@ -18,7 +18,7 @@ Deeper explanation: If thread A and thread B access a cache at the same time, th
 
 **Testing**
 
-I stress tested this program by creating a multi-shared cache and querying it over many threads concurrently running a stream of GET/SET requests. I then compared this to a single shard with the same overall capacity answering the same amount of total requests. I then validated my threads were actually running concurrently by checking 'htop' on a large number of requests and checking manually if all my CPU cores were being used at once. I tested this on a few million requests on each type of cache (single vs multi-sharded). Results are below.
+I stress tested this program by creating a multi-sharded cache and querying it over many threads concurrently running a stream of GET/SET requests. I then compared this to a single shard with the same overall capacity answering the same amount of total requests. I then validated my threads were actually running concurrently by checking 'htop' on a large number of requests and checking manually if all my CPU cores were being used at once. I tested this on a few million requests on each type of cache (single vs multi-sharded). Results are below.
 
 **Results**
 
