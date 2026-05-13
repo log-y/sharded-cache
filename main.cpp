@@ -13,8 +13,8 @@
 using namespace std;
 
 int OPS_PER_THREAD = 40000;
-int THREADS = 60;
-int NUM_SHARDS = 126;
+int THREADS = 80;
+int NUM_SHARDS = 128;
 int CAPACITY_PER_SHARD = 4098;
 int READ_TO_WRITES = 0;
 

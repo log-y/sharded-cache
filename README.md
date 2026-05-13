@@ -1,5 +1,11 @@
 # sharded-cache
 
+output using this config:
+Time for single threaded ops: 873ms
+Time for multi threaded ops: 114ms
+speedup: 7.7x using 80 threads
+
+
 compile and run: 
 g++ main.cpp cache.cpp shard.cpp linkedlist.cpp node.cpp -o lru_cache
 
