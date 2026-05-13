@@ -66,6 +66,7 @@ void stress_test_single_threaded()
     for (int j = 0; j < READ_TO_WRITES; j++){
       shard.get(key - j);
     }
+    assert(retrieved == (i + (key * 1000)));
   }
 
   cout << "ending single threaded stress test" << endl;
@@ -103,6 +104,7 @@ void stress_test_helper(Cache &cache, int num_operations, int thread_id)
     for (int j = 0; j < READ_TO_WRITES; j++){
       cache.get(key - j);
     }
+    assert(retrieved == (i + (key * 1000)));
   }
 }
 

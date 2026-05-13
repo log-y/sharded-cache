@@ -22,8 +22,6 @@ uint32_t hash_int(uint32_t x) {
 }
 
 int Cache::get_idx(int key){
-  // uint32_t hash = hash_int(key);
-  // return hash % this->shard_count;
   return (unsigned int)key % this->shard_count;
 }
 
